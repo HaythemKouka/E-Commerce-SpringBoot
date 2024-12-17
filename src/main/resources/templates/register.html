@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inscription</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <h2>Inscription</h2>
+
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" th:field="*{email}" placeholder="Entrez votre email" required />
+        </div>
+
+        <div>
+            <label for="password">Mot de passe:</label>
+            <input type="password" th:field="*{password}" placeholder="Entrez votre mot de passe" required />
+        </div>
+
+        <div>
+            <label for="confirmPassword">Confirmer le mot de passe:</label>
+            <input type="password" th:field="*{confirmPassword}" placeholder="Confirmez votre mot de passe" required />
+        </div>
+
+        <div>
+            <button type="submit">S'inscrire</button>
+        </div>
+
+        <!-- Affichage des erreurs de validation si présentes -->
+        <div th:if="${#fields.hasErrors('email')}" style="color: red;">
+            <p th:errors="*{email}">Email invalide</p>
+        </div>
+        <div th:if="${#fields.hasErrors('password')}" style="color: red;">
+            <p th:errors="*{password}">Mot de passe invalide</p>
+        </div>
+        <div th:if="${#fields.hasErrors('confirmPassword')}" style="color: red;">
+            <p th:errors="*{confirmPassword}">Les mots de passe ne correspondent pas</p>
+        </div>
+    </form>
+</body>
+</html>
